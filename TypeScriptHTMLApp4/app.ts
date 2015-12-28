@@ -1,4 +1,7 @@
-﻿class Greeter {
+﻿/// <reference path="Scripts/typings/knockout/knockout.d.ts"/>
+/// <reference path="Scripts/typings/jquery/jquery.d.ts"/>
+
+class Greeter {
     element: HTMLElement;
     span: HTMLElement;
     timerToken: number;
@@ -26,3 +29,16 @@ window.onload = () => {
     var greeter = new Greeter(el);
     greeter.start();
 };
+
+class MyViewModel {
+    searchString = ko.observable<string>();
+    mycommand = () => {
+        window.alert(this.searchString());
+    }
+}
+
+$(() => {
+
+    ko.applyBindings(new MyViewModel());
+
+});
