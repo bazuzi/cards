@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="app.css" type="text/css" />
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/knockout/build/output/knockout-latest.debug.js"></script>
-    <script src="app.js"></script>
 </head>
 <body>
     <h1>TypeScript HTML App</h1>
 
-<div id="content"></div>
+<H2>Cards in hand:</H2>
+<ul data-bind="foreach: cardsInHand">
+        <li data-bind="text: CardRank[$data.rank] + ' of ' + CardSuit[$data.suit]"></li>
+    </ul>
 
-    <input id="searchString" data-bind="textInput: searchString" size="40" class="form-control" />
-    <input type="button" value="Search" data-bind="click: mycommand" />
+    <script src="app.js"></script>
+
 </body>
 </html>

@@ -1,44 +1,47 @@
 ﻿/// <reference path="Scripts/typings/knockout/knockout.d.ts"/>
 /// <reference path="Scripts/typings/jquery/jquery.d.ts"/>
 
-class Greeter {
-    element: HTMLElement;
-    span: HTMLElement;
-    timerToken: number;
+interface ICard { }
 
-    constructor(element: HTMLElement) {
-        this.element = element;
-        this.element.innerHTML += "The time is: ";
-        this.span = document.createElement('span');
-        this.element.appendChild(this.span);
-        this.span.innerText = new Date().toUTCString();
-    }
+class RegularCard implements ICard {
+    constructor(public suit: CardSuit, public rank: CardRank) { }
 
-    start() {
-        this.timerToken = setInterval(() => this.span.innerHTML = new Date().toUTCString(), 500);
-    }
+    
+}
 
-    stop() {
-        clearTimeout(this.timerToken);
-    }
+enum CardSuit {
+    Clubs,
+    Diamonds,
+    Hearts,
+    Spades
+}
+
+enum CardRank {
+    Ace = 1,
+    Two,
+    Three,
+    Four,
+    Five,
+    Six,
+    Seven,
+    Eight,
+    Nine,
+    Jack,
+    Queen,
+    King,
 
 }
 
-window.onload = () => {
-    var el = document.getElementById('content');
-    var greeter = new Greeter(el);
-    greeter.start();
-};
 
 class MyViewModel {
-    searchString = ko.observable<string>();
-    mycommand = () => {
-        window.alert(this.searchString());
-    }
+    cardsInHand = ko.observableArray<RegularCard>([
+        new RegularCard(CardSuit.Hearts, CardRank.Ace),
+        new RegularCard(CardSuit.Hearts, CardRank.Two),
+        new RegularCard(CardSuit.Hearts, CardRank.Three),
+        new RegularCard(CardSuit.Hearts, CardRank.Four),
+    ]);
 }
 
 $(() => {
-
     ko.applyBindings(new MyViewModel());
-
 });
