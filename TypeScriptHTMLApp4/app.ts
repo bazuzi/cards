@@ -6,7 +6,7 @@ interface ICard { }
 class RegularCard implements ICard {
     constructor(public suit: CardSuit, public rank: CardRank) { }
 
-    
+
 }
 
 enum CardSuit {
@@ -29,17 +29,18 @@ enum CardRank {
     Jack,
     Queen,
     King,
-
 }
 
 
 class MyViewModel {
-    cardsInHand = ko.observableArray<RegularCard>([
+    cardsInHand = ko.observableArray<ICard>([
         new RegularCard(CardSuit.Hearts, CardRank.Ace),
         new RegularCard(CardSuit.Hearts, CardRank.Two),
         new RegularCard(CardSuit.Hearts, CardRank.Three),
         new RegularCard(CardSuit.Hearts, CardRank.Four),
     ]);
+
+    topDiscard = ko.observable<ICard>();
 }
 
 $(() => {

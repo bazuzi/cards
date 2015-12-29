@@ -11,11 +11,10 @@
 <body>
     <h1>TypeScript HTML App</h1>
 
-<H2>Cards in hand:</H2>
-<ul data-bind="foreach: cardsInHand">
+    <h2>Cards in hand:</h2>
+    <ul data-bind="foreach: cardsInHand">
         <li data-bind="text: CardRank[$data.rank] + ' of ' + CardSuit[$data.suit]"></li>
     </ul>
-
     <script src="app.js"></script>
 
 </body>
