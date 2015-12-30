@@ -7,15 +7,49 @@
     <link rel="stylesheet" href="app.css" type="text/css" />
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/knockout/build/output/knockout-latest.debug.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
     <h1>TypeScript HTML App</h1>
 
     <h2>Cards in hand:</h2>
-    <ul data-bind="foreach: cardsInHand">
-        <li data-bind="text: CardRank[$data.rank] + ' of ' + CardSuit[$data.suit]"></li>
+    <table>
+        <thead>
+            <tr>
+                <td>Card</td>
+                <td>Use in meld 1</td>
+                <td>Use in meld 2</td>
+                <td>Use in meld 3</td>
+                <td>Use in meld 4</td>
+                <td>Discard</td>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: cardsInHand">
+            <tr>
+                <td data-bind="text: $data.card"></td>
+                <td><input type="checkbox" data-bind="checked: $data.inMeld1" /></td>
+                <td><input type="checkbox" data-bind="checked: $data.inMeld2" /></td>
+                <td><input type="checkbox" data-bind="checked: $data.inMeld3" /></td>
+                <td><input type="checkbox" data-bind="checked: $data.inMeld4" /></td>
+                <td><input type="radio" data-bind="checked: $data.toDiscard" name="discard"/></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button type="button" data-bind="clicked: drawFromStock">Draw from Stock</button>
+    <button type="button" data-bind="clicked: drawFromDiscard">Draw from Discard</button>
+    <button type="button" data-bind="clicked: discard">Discard</button>
+
+    <h2>Melds on table:</h2>
+    <ul data-bind="foreach: meldsOnTable">
+        <hr />
+        <ul data-bind="foreach: $data.cards">
+            <li data-bind="text: $data"></li>
+        </ul>
     </ul>
-    <script src="app.js"></script>
+
+    <h2>Top Discard:</h2>
+    <p data-bind="text: topDiscard"></p>
 
 </body>
 </html>
